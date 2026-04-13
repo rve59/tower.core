@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tp:taxonomyPackage xmlns:tp="http://xbrl.org/2016/taxonomy-package">
+  <tp:identifier>MOCK-IXBRL-2026</tp:identifier>
+  <tp:name>Mock iXBRL Financial Report</tp:name>
+  <tp:entryPoints>
+    <tp:entryPoint>
+      <tp:name>Main Report</tp:name>
+      <tp:entryPointDocument href="../main.xhtml"/>
+    </tp:entryPoint>
+  </tp:entryPoints>
+</tp:taxonomyPackage>

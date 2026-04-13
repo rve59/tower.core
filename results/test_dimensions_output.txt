@@ -1,0 +1,36 @@
+Dimensional Validation for RevenueNetSalesDisaggregatedbySignificantProductsandServicesDetails
+{
+  "status": "success",
+  "role": "http://www.apple.com/role/RevenueNetSalesDisaggregatedbySignificantProductsandServicesDetails",
+  "total_facts_checked": 54,
+  "violations": []
+}
+
+Dimensional Structure for ELR: http://www.apple.com/role/RevenueNetSalesDisaggregatedbySignificantProductsandServicesDetails
+├── ProductsAndServicesDomain (Default)
+│   ├── IPhoneMember
+│   ├── MacMember
+│   ├── IPadMember
+│   ├── WearablesHomeandAccessoriesMember
+│   ├── ServiceMember
+│   ├── IPhoneMember [Member]
+│   ├── MacMember [Member]
+│   ├── IPadMember [Member]
+│   ├── WearablesHomeandAccessoriesMember [Member]
+│   └── ServiceMember [Member]
+└── DisaggregationOfRevenueLineItems
+    ├── RevenueFromContractWithCustomerExcludingAssessedTax
+    ├── DisaggregationOfRevenueTable [Hypercube]
+    │   └── ProductOrServiceAxis [Dimension]
+    │       └── ProductsAndServicesDomain [Member] (Default)
+    │           ├── IPhoneMember
+    │           ├── MacMember
+    │           ├── IPadMember
+    │           ├── WearablesHomeandAccessoriesMember
+    │           ├── ServiceMember
+    │           ├── IPhoneMember [Member]
+    │           ├── MacMember [Member]
+    │           ├── IPadMember [Member]
+    │           ├── WearablesHomeandAccessoriesMember [Member]
+    │           └── ServiceMember [Member]
+    └── RevenueFromContractWithCustomerExcludingAssessedTax [Member]

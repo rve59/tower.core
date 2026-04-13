@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ix="http://www.xbrl.org/2013/inlineXBRL" 
+      xmlns:ixt="http://www.xbrl.org/inlineXBRL/transformation/2011-04-20"
+      xmlns:xbrli="http://www.xbrl.org/2003/instance">
+<head>
+    <title>Mock Financials</title>
+</head>
+<body>
+    <div style="display:none">
+        <ix:resources>
+            <xbrli:context id="ctx_2024">
+                <xbrli:entity>
+                    <xbrli:identifier scheme="http://standards.org">MOCKER</xbrli:identifier>
+                </xbrli:entity>
+                <xbrli:period>
+                    <xbrli:instant>2024-12-31</xbrli:instant>
+                </xbrli:period>
+            </xbrli:context>
+            <xbrli:unit id="usd">
+                <xbrli:measure>iso4217:USD</xbrli:measure>
+            </xbrli:unit>
+        </ix:resources>
+    </div>
+
+    <h1>Condensed Balance Sheet</h1>
+    <p>As of December 31, 2024, our total assets were 
+       <ix:nonFraction name="Assets" contextRef="ctx_2024" unitRef="usd" decimals="-6" scale="6" id="idx_assets_main">
+           150
+       </ix:nonFraction> million USD. (Fact A: Rounded)
+    </p>
+    
+    <p>Total Liabilities: 
+       <ix:nonFraction name="Liabilities" contextRef="ctx_2024" unitRef="usd" decimals="-6" scale="6" id="idx_liabs_main">
+           60
+       </ix:nonFraction>
+    </p>
+
+</body>
+</html>

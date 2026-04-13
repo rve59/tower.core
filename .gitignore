@@ -1,0 +1,17 @@
+# Exclude independent Git sub-repositories within libraries/
+libraries/lib_xbrl/
+libraries/lib_xbrl_auditor/
+libraries/nexus-tools-ifrs-guidelines-parser/
+libraries/nexus-tools-tutorials/
+libraries/nexus-tools-xbrlprocessor/
+
+# Standard Python excludes
+__pycache__/
+*.pyc
+.env
+.cache/
+audit_reports/
+sample_filings_ifrs/
+sample_filings_ugaap/
+asml_2023_esef.zip
+gpu_profile.txt

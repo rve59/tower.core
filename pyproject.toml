@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tower-core-app"
+version = "0.1.0"
+description = "Nexus Tower Core Application"
+authors = [{ name = "Raynier" }]
+requires-python = ">=3.9"
+dependencies = [
+    "lib-xbrl",
+    "lib-xbrl-auditor",
+    "nexus-tools-ifrs-guidelines-parser",
+    "nexus-tools-tutorials",
+    "nexus-tools-xbrlprocessor",
+]
+
+[tool.setuptools.package-dir]
+"lib_xbrl" = "../xbrl.libs/lib_xbrl"
+"lib_xbrl_auditor" = "../xbrl.libs/lib_xbrl_auditor"
+"nexus_tools_ifrs_guidelines_parser" = "../xbrl.libs/nexus-tools-ifrs-guidelines-parser"
+"nexus_tools_tutorials" = "../xbrl.libs/nexus-tools-tutorials"
+"nexus_tools_xbrlprocessor" = "../xbrl.libs/nexus-tools-xbrlprocessor"

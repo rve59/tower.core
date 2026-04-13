@@ -1,0 +1,21 @@
+[project]
+name = "ifrs-guidelines-parser-core"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Antigravity Agent",email = "antigravity@gemini.ai"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pytesseract (>=0.3.13,<0.4.0)",
+    "pdf2image (>=1.17.0,<2.0.0)",
+    "pillow (>=12.2.0,<13.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "ifrs_guidelines_parser", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

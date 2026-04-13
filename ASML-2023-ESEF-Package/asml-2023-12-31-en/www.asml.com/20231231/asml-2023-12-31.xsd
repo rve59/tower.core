@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--XBRL Document Created with the Workiva Platform-->
+<!--Copyright 2024 Workiva-->
+<!--r:808990c0-7812-46b4-bc9c-14626e470956,g:5d30fca6-c438-488e-afcf-03566c91f449-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:asml="http://www.asml.com/20231231" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:dtr-types="http://www.xbrl.org/dtr/type/2020-01-21" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.asml.com/20231231">
+  <xs:import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+  <xs:import namespace="http://www.xbrl.org/2003/linkbase" schemaLocation="http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd"/>
+  <xs:import namespace="http://www.xbrl.org/dtr/type/2020-01-21" schemaLocation="https://www.xbrl.org/dtr/type/2020-01-21/types.xsd"/>
+  <xs:import namespace="https://www.esma.europa.eu/taxonomy/2022-03-24/esef_cor" schemaLocation="https://www.esma.europa.eu/taxonomy/2022-03-24/esef_cor.xsd"/>
+  <xs:annotation>
+    <xs:appinfo>
+      <link:linkbaseRef xmlns:xlink="http://www.w3.org/1999/xlink" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="https://www.esma.europa.eu/taxonomy/2022-03-24/esef_cor-lab-en.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:type="simple"/>
+      <link:linkbaseRef xmlns:xlink="http://www.w3.org/1999/xlink" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="https://www.esma.europa.eu/taxonomy/2022-03-24/esef_cor-gen-en.xml" xlink:role="http://www.xbrl.org/2003/role/linkbaseRef" xlink:type="simple"/>
+      <link:linkbaseRef xmlns:xlink="http://www.w3.org/1999/xlink" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="asml-2023-12-31_pre.xml" xlink:role="http://www.xbrl.org/2003/role/presentationLinkbaseRef" xlink:type="simple"/>
+      <link:linkbaseRef xmlns:xlink="http://www.w3.org/1999/xlink" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="asml-2023-12-31_def.xml" xlink:role="http://www.xbrl.org/2003/role/definitionLinkbaseRef" xlink:type="simple"/>
+      <link:linkbaseRef xmlns:xlink="http://www.w3.org/1999/xlink" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="asml-2023-12-31_lab-en.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:type="simple"/>
+      <link:linkbaseRef xmlns:xlink="http://www.w3.org/1999/xlink" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="asml-2023-12-31_cal.xml" xlink:role="http://www.xbrl.org/2003/role/calculationLinkbaseRef" xlink:type="simple"/>
+      <link:roleType id="StatementofcomprehensiveincomeprofitorlossbyfunctionofexpenseStatement" roleURI="http://www.asml.com/role/StatementofcomprehensiveincomeprofitorlossbyfunctionofexpenseStatement">
+        <link:definition>[0000001] Statement of comprehensive income, profit or loss, by function of expense (Statement)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="StatementofcomprehensiveincomeOCIcomponentspresentednetoftaxStatement" roleURI="http://www.asml.com/role/StatementofcomprehensiveincomeOCIcomponentspresentednetoftaxStatement">
+        <link:definition>[0000002] Statement of comprehensive income, OCI components presented net of tax (Statement)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="StatementoffinancialpositioncurrentnoncurrentStatement" roleURI="http://www.asml.com/role/StatementoffinancialpositioncurrentnoncurrentStatement">
+        <link:definition>[0000003] Statement of financial position, current/non-current (Statement)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="StatementofchangesinequityStatement" roleURI="http://www.asml.com/role/StatementofchangesinequityStatement">
+        <link:definition>[0000004] Statement of changes in equity (Statement)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="StatementofchangesinequityParenthetical" roleURI="http://www.asml.com/role/StatementofchangesinequityParenthetical">
+        <link:definition>[0000005] Statement of changes in equity (Parenthetical)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="StatementofcashflowsindirectmethodStatement" roleURI="http://www.asml.com/role/StatementofcashflowsindirectmethodStatement">
+        <link:definition>[0000006] Statement of cash flows, indirect method (Statement)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="StatementofcashflowsindirectmethodParenthetical" roleURI="http://www.asml.com/role/StatementofcashflowsindirectmethodParenthetical">
+        <link:definition>[0000007] Statement of cash flows, indirect method (Parenthetical)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="StatementofcomprehensiveincomeOCIcomponentspresentednetoftaxParenthetical" roleURI="http://www.asml.com/role/StatementofcomprehensiveincomeOCIcomponentspresentednetoftaxParenthetical">
+        <link:definition>[0000008] Statement of comprehensive income, OCI components presented net of tax (Parenthetical)</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="Tagsthatmustbeappliedifcorrespondinginformationispresentinareport" roleURI="http://www.asml.com/role/Tagsthatmustbeappliedifcorrespondinginformationispresentinareport">
+        <link:definition>[0000009] Tags that must be applied if corresponding information is present in a report</link:definition>
+        <link:usedOn>link:presentationLink</link:usedOn>
+        <link:usedOn>link:calculationLink</link:usedOn>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="Anchoring" roleURI="http://www.asml.com/role/Anchoring">
+        <link:definition>Anchoring</link:definition>
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element id="asml_AdjustmentsForEquityMethodInvestments" abstract="false" name="AdjustmentsForEquityMethodInvestments" nillable="true" xbrli:periodType="duration" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="asml_FundingProvidedForToolingAndFacilitiesInvestmentsInAssociates" abstract="false" name="FundingProvidedForToolingAndFacilitiesInvestmentsInAssociates" nillable="true" xbrli:periodType="duration" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="asml_CostOfServiceAndFieldOptionsSales" abstract="false" name="CostOfServiceAndFieldOptionsSales" nillable="true" xbrli:periodType="duration" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="asml_PriorPeriodProfit" abstract="false" name="PriorPeriodProfit" nillable="true" xbrli:periodType="duration" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="asml_AdjustmentsForIncreaseDecreaseContractAssetsAndLiabilities" abstract="false" name="AdjustmentsForIncreaseDecreaseContractAssetsAndLiabilities" nillable="true" xbrli:periodType="duration" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="asml_IssuanceOfShares" abstract="false" name="IssuanceOfShares" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:sharesItemType"/>
+  <xs:element id="asml_CostOfSystemSales" abstract="false" name="CostOfSystemSales" nillable="true" xbrli:periodType="duration" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="asml_AdjustmentsForInventoryReserve" abstract="false" name="AdjustmentsForInventoryReserve" nillable="true" xbrli:periodType="duration" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="asml_NetIncomeMember" abstract="true" name="NetIncomeMember" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="dtr-types:domainItemType"/>
+  <xs:element id="asml_NetSystemSales" abstract="false" name="NetSystemSales" nillable="true" xbrli:periodType="duration" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="asml_AdjustmentForIncreaseDecreaseCurrentTaxAssetsAndLiabilities" abstract="false" name="AdjustmentForIncreaseDecreaseCurrentTaxAssetsAndLiabilities" nillable="true" xbrli:periodType="duration" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="asml_IncreaseDecreaseInLegalReservesResearchAndDevelopmentExpendituresEquity" abstract="false" name="IncreaseDecreaseInLegalReservesResearchAndDevelopmentExpendituresEquity" nillable="true" xbrli:periodType="duration" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="asml_AdjustmentsForDecreaseIncreaseInFinanceReceivables" abstract="false" name="AdjustmentsForDecreaseIncreaseInFinanceReceivables" nillable="true" xbrli:periodType="duration" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="asml_PurchaseOfTreasurySharesInShares" abstract="false" name="PurchaseOfTreasurySharesInShares" nillable="true" xbrli:periodType="duration" substitutionGroup="xbrli:item" type="xbrli:sharesItemType"/>
+  <xs:element id="asml_NoncashPortionOfPropertyPlantAndEquipmentInInvestingActivities" abstract="false" name="NoncashPortionOfPropertyPlantAndEquipmentInInvestingActivities" nillable="true" xbrli:periodType="duration" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="asml_NonCurrentLoansReceivable" abstract="false" name="NonCurrentLoansReceivable" nillable="true" xbrli:periodType="instant" xbrli:balance="debit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="asml_NetServiceAndFieldOptionSales" abstract="false" name="NetServiceAndFieldOptionSales" nillable="true" xbrli:periodType="duration" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+  <xs:element id="asml_ShareOfAccumulatedOtherComprehensiveIncomeOfAssociatesAndJointVenturesAccountedForUsingEquityMethodNetOfTax" abstract="false" name="ShareOfAccumulatedOtherComprehensiveIncomeOfAssociatesAndJointVenturesAccountedForUsingEquityMethodNetOfTax" nillable="true" xbrli:periodType="duration" xbrli:balance="credit" substitutionGroup="xbrli:item" type="xbrli:monetaryItemType"/>
+</xs:schema>
