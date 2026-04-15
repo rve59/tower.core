@@ -12,12 +12,12 @@ The goal is to resolve two major warnings issued by Google's libraries during ou
 
 ## Proposed Changes
 
-### [MODIFY] [providers.py](file:///home/raynier/Development/workspaces/fullstack/vibes/00_NEXUS/tools.core/libraries/lib_xbrl_auditor/providers.py)
+### [MODIFY] [providers.py](file:///home/raynier/Development/workspaces/fullstack/vibes/TOWER_WORKSPACE/tools.core/libraries/lib_xbrl_auditor/providers.py)
 - **Migrate Imports**: Switch from `import google.generativeai` to `from google import genai`.
 - **Client Refactor**: Replace the global `genai.configure()` call with a class-level `genai.Client` instantiation.
 - **Query Method Update**: Update the `query` method to use the new `client.models.generate_content` signature.
 
-### [NEW] [requirements_update.txt](file:///home/raynier/Development/workspaces/fullstack/vibes/00_NEXUS/tools.core/requirements_update.txt)
+### [NEW] [requirements_update.txt](file:///home/raynier/Development/workspaces/fullstack/vibes/TOWER_WORKSPACE/tools.core/requirements_update.txt)
 - Create a temporary requirements file to ensure all required Google libraries are at the correct versions.
 
 ## Verification Plan

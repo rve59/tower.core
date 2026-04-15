@@ -1,0 +1,6 @@
+lib-xbrl @ file:///home/raynier/Development/workspaces/fullstack/vibes/TOWER_WORKSPACE/xbrl.libs/lib_xbrl
+lib-xbrl-auditor @ file:///home/raynier/Development/workspaces/fullstack/vibes/TOWER_WORKSPACE/xbrl.libs/lib_xbrl_auditor
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings

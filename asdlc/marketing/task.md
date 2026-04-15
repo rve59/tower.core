@@ -1,0 +1,6 @@
+- [x] Create `asdlc/marketing/addressable_target_market_000111.md`
+- [x] Create `asdlc/marketing/international_market_brief_000112.md`
+- [x] Add "Utility-Grade iXBRL" Pillar
+- [x] Append detailed Company Profiles (US Top 10)
+- [x] Expand profiles with Website/Contact/SEC data
+- [x] Map Regulatory Ecosystems (Alternate SECs)
