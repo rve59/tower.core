@@ -3,7 +3,7 @@
 ## Executive Summary
 This document outlines the granular project plan for **TOWER Core (Gen 1): Mechanical Excellence & Reliability**. Following the updated architectural directives, the **backend orchestration layer** will be powered exclusively by a high-performance **Python / FastAPI** stack, while the **frontend** will be built using **React and Tailwind CSS**. 
 
-The core objective is to deliver a "Zero-Hiccup" compliance filing environment powered by the TOWER-K ingestion engine. The data layer will utilize **Polars** for high-speed columnar manipulation, **Ladybug** for validation, and native **Parquet** generation for persistent, memory-mapped state management.
+The core objective is to deliver a "Zero-Hiccup" compliance filing environment powered by the TOWER-K ingestion engine. The data layer will utilize **Polars** for high-speed columnar manipulation and validation, hosted in a dedicated free-threaded **Python 3.14t** microservice, and native **Parquet** generation for persistent, memory-mapped state management.
 
 ---
 
@@ -29,7 +29,7 @@ The user interface will be entirely decoupled from the backend serving layer. It
 *   **Action**: Implement the heavy data-visualization components.
 *   **Deliverables**:
     *   Virtual-scrolling React data table capable of rendering massive datasets served from the Polars/Parquet backend.
-    *   "Pre-Audit Shield" UI: A real-time scorecard displaying missing links, calculation inconsistencies, and Ladybug validation warnings.
+    *   "Pre-Audit Shield" UI: A real-time scorecard displaying missing links, calculation inconsistencies, and Polars-driven structural validation warnings.
 
 ---
 
@@ -56,12 +56,12 @@ The API layer acts as the orchestrator, built on **Python/FastAPI**, while **TOW
     *   Map the standardized Polars dataframes to the FERC Form 1/714 taxonomy structure.
     *   Execute hardcoded regulatory intersection rules against the columnar data.
 
-### Phase 2.4: Ladybug Engine Validation & Output
-*   **Module**: `xbrl.libs` (Ladybug Core)
+### Phase 2.4: Polars Engine Validation & Output
+*   **Module**: `tower.core/apps/data-engine` (Python 3.14t)
 *   **Functionality**:
-    *   Pass the fully mapped structural graph representations to the Ladybug engine.
-    *   Execute hyper-fast structural validations across the taxonomy graph.
-    *   Generate a structured "Error Graph" to be routed back through FastAPI to the React UI.
+    *   Execute high-performance structural validations using **Polars-GPU** filters.
+    *   Leverage Python 3.14t free-threading for parallel graph consistency checks.
+    *   Generate a structured "Error Graph" to be routed back through the FastAPI Gateway.
     *   Finalize and export identical XBRL-CSV outputs ready for regulatory submission.
 
 ---
@@ -76,7 +76,7 @@ The `tower.core/apps/backend` relies on this directory for foundational data par
 
 ### 3.2 `TOWER_WORKSPACE/xbrl.libs` (XBRL Core Processing)
 This directory handles operations strictly tied to the XBRL specification and graph modeling:
-*   **`lib_xbrl_ladybug_bridge`**: Handles the ingestion and production of xbrl-cv from ladybug sources.
+*   **`lib_xbrl_polars_bridge`**: Handles the ingestion and production of XBRL-CSV from Polars-sanitized sources.
 
 ### 3.3 `TOWER_WORKSPACE/ferc.libs` (Domain-Specific Rules)
 Once data is standardized by `ingest.libs`, the `tower.core/apps/backend` orchestrates validation by passing the columnar data to this directory:
@@ -106,8 +106,8 @@ gantt
     ferc.libs (Logic/Intersections)   :a2, after a1, 14d
     xbrl.libs (Ladybug Bridge)        :a3, after a2, 14d
     section Backend (tower.core)
-    FastAPI Scaffolding               :b1, 2026-04-15, 7d
-    API Orchestration (TOWER-K)       :b2, after a1, 21d
+    FastAPI Scaffolding (uv/api)       :b1, 2026-04-15, 7d
+    Data Engine (uv/data-engine)       :b2, after a1, 21d
     section Frontend (tower.core)
     React/Tailwind Scaffolding        :c1, 2026-04-15, 14d
     Guided Workflow Wizard            :c2, after b1, 14d

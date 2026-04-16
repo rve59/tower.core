@@ -1,21 +1,15 @@
 [project]
-name = "tower-core-app"
+name = "tower-api"
 version = "0.1.0"
-description = "FERC Tower Core Application"
+description = "TOWER API Gateway"
 authors = [{ name = "Raynier" }]
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 dependencies = [
-    "lib-xbrl",
-    "lib-xbrl-auditor",
     "fastapi",
     "uvicorn[standard]",
     "pydantic",
     "pydantic-settings",
 ]
-
-[tool.uv.sources]
-lib-xbrl = { workspace = true }
-lib-xbrl-auditor = { workspace = true }
 
 [build-system]
 requires = ["hatchling"]

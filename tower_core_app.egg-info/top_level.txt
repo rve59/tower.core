@@ -1,2 +1,0 @@
-lib_xbrl
-lib_xbrl_auditor
