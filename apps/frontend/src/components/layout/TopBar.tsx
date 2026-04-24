@@ -5,10 +5,10 @@ import { usePipelineStore } from '../../stores/pipeline.store'
 import type { ActiveView } from '../../types/filing'
 
 const NAV_ITEMS: { label: string; view: ActiveView }[] = [
-  { label: 'Dashboard',  view: 'dashboard' },
   { label: 'Filings',    view: 'filings' },
   { label: 'Validation', view: 'validation' },
   { label: 'Reports',    view: 'reports' },
+  { label: 'Dashboard',  view: 'dashboard' },
 ]
 
 const HEALTH_COLOR: Record<string, string> = {

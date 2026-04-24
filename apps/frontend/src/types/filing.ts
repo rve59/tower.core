@@ -5,6 +5,7 @@ export interface Filing {
   entity: string
   period: string
   status: 'pending' | 'pass' | 'fail'
+  tier: 'bronze' | 'silver' | 'gold'
   filed_at: string        // ISO datetime string
   has_errors: boolean
 }
@@ -22,4 +23,4 @@ export interface Entity {
 }
 
 export type PipelineHealth = 'healthy' | 'degraded' | 'down'
-export type ActiveView = 'dashboard' | 'filings' | 'validation' | 'reports'
+export type ActiveView = 'filings' | 'validation' | 'reports' | 'dashboard'

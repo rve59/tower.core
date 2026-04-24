@@ -1,17 +1,43 @@
-# Exclude independent Git sub-repositories within libraries/
+# tower_core: Standard Ignore Rules
+# Updated: 2026-04-23
+
+# --- Sub-repositories ---
 libraries/lib_xbrl/
 libraries/lib_xbrl_auditor/
 libraries/nexus-tools-ifrs-guidelines-parser/
 libraries/nexus-tools-tutorials/
 libraries/nexus-tools-xbrlprocessor/
 
-# Standard Python excludes
+# --- Node.js / Frontend ---
+node_modules/
+.next/
+out/
+.turbo/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# --- Python ---
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- Environment & Logs ---
 .env
-.cache/
+.env.*
+!.env.example
+*.log
 audit_reports/
+gpu_profile.txt
+
+# --- Data ---
 sample_filings_ifrs/
 sample_filings_ugaap/
 asml_2023_esef.zip
-gpu_profile.txt

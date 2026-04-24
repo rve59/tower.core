@@ -6,11 +6,15 @@ import type { Entity } from '../types/filing'
 // --- Filters ---
 interface FiltersStore {
   year: string
+  quarter: string
   setYear: (year: string) => void
+  setQuarter: (quarter: string) => void
 }
 export const useFiltersStore = create<FiltersStore>((set) => ({
-  year: String(new Date().getFullYear()),
+  year: '2025',
+  quarter: '1',
   setYear: (year) => set({ year }),
+  setQuarter: (quarter) => set({ quarter }),
 }))
 
 // --- Search ---
@@ -19,7 +23,7 @@ interface SearchStore {
   setQuery: (query: string) => void
 }
 export const useSearchStore = create<SearchStore>((set) => ({
-  query: '',
+  query: 'C000171',
   setQuery: (query) => set({ query }),
 }))
 

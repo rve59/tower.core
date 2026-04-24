@@ -52,6 +52,11 @@
   --color-info:          hsl(201, 80%, 55%);
   --color-info-subtle:   hsl(201, 40%, 12%);
 
+  /* — Color: Tiers — */
+  --color-tier-bronze:   hsl(30, 40%, 45%);
+  --color-tier-silver:   hsl(210, 15%, 65%);
+  --color-tier-gold:     hsl(45, 90%, 50%);
+
   /* — Color: Interactive States — */
   --color-hover:         hsla(221, 83%, 57%, 0.10);
   --color-selected:      hsla(221, 83%, 57%, 0.18);

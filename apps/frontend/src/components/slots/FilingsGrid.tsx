@@ -30,11 +30,12 @@ const COLUMNS: GridColumn[] = [
   { title: 'Entity',    id: 'entity',    width: 180 },
   { title: 'Period',    id: 'period',    width: 100 },
   { title: 'Status',    id: 'status',    width: 90  },
+  { title: 'Tier',      id: 'tier',      width: 80  },
   { title: 'Filed At',  id: 'filed_at',  width: 160 },
   { title: 'Has Errors',id: 'has_errors',width: 90  },
 ]
 
-const COL_KEYS: (keyof Filing)[] = ['entity', 'period', 'status', 'filed_at', 'has_errors']
+const COL_KEYS: (keyof Filing)[] = ['entity', 'period', 'status', 'tier', 'filed_at', 'has_errors']
 
 let _db: duckdb.AsyncDuckDB | null = null
 
@@ -100,6 +101,7 @@ export function FilingsGrid() {
         entity: String(r.entity),
         period: String(r.period),
         status: r.status as Filing['status'],
+        tier: r.tier as Filing['tier'],
         filed_at: String(r.filed_at),
         has_errors: Boolean(r.has_errors),
       }))

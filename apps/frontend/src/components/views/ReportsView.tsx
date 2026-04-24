@@ -1,13 +1,26 @@
-// [LSL-GEN] id: ReportsView | REGION reports row fill
+import { FilingNavigator } from '../layout/FilingNavigator'
+import { WorkspaceArea } from '../layout/WorkspaceArea'
+import { ContentPane } from '../layout/ContentPane'
+
+import { MappingStudio } from '../slots/MappingStudio'
+
 export function ReportsView() {
   return (
-    <div className="flex-1 flex items-center justify-center bg-[var(--color-base)]">
-      <div className="text-center p-8 rounded-lg border border-dashed border-[var(--color-border)]">
-        <h2 className="text-xl font-bold text-[var(--color-text-primary)] mb-2">Reports View</h2>
-        <p className="text-sm text-[var(--color-text-muted)] italic">
-          [PROTO] #proto-rep — Component scaffolded from TOWER-LSL
-        </p>
+    <div
+      data-region="reports"
+      className="flex flex-row flex-1 overflow-hidden"
+    >
+      <div className="w-64 flex-none border-r border-[var(--color-border-subtle)]">
+        <FilingNavigator />
       </div>
+      
+      <WorkspaceArea>
+        <ContentPane>
+          <div className="flex-1 overflow-hidden p-6 h-full">
+            <MappingStudio />
+          </div>
+        </ContentPane>
+      </WorkspaceArea>
     </div>
   )
 }

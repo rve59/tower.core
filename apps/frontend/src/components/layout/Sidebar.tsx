@@ -1,67 +1,43 @@
-// [LSL-GEN] id: Sidebar | REGION 20 Sidebar col fixed panel
-import { useEntitiesStore, useFiltersStore } from '../../stores/aux.store'
-import { useWorkspaceStore } from '../../stores/workspace.store'
-import { useFilingsStore } from '../../stores/filings.store'
+import { useRouterStore } from '../../stores/router.store'
 
 export function Sidebar() {
-  const entities = useEntitiesStore((s) => s.list)
-  const filings = useFilingsStore((s) => s.items)
-  const selectFiling = useWorkspaceStore((s) => s.selectFiling)
-  const selectedFiling = useWorkspaceStore((s) => s.selectedFiling)
+  const { activeView, navigate } = useRouterStore()
+
+  const NAV_ITEMS = [
+    { id: 'filings',    label: 'Files', icon: <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" /> },
+    { id: 'validation', label: 'Audit', icon: <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" /> },
+    { id: 'reports',    label: 'Report', icon: <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" /> },
+    { id: 'dashboard',  label: 'Dash', icon: <path d="M3 3h7v7H3V3zm11 0h7v7h-7V3zm0 11h7v7h-7v-7zM3 14h7v7H3v-7z" /> },
+  ]
 
   return (
     <div
       data-region="Sidebar"
-      className="panel flex flex-col flex-none overflow-y-auto border-r border-[var(--color-border-subtle)]"
-      style={{ width: '20%', minWidth: 180, backgroundColor: 'var(--color-panel-bg)' }}
+      className="flex flex-col flex-none w-16 bg-[var(--color-panel-bg)] border-r border-[var(--color-border-subtle)] items-center py-4 gap-4"
     >
-      {/* SLOT NavGroup #entity-nav * @entities.list */}
-      <div id="entity-nav" className="p-3">
-        <p className="text-[10px] font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-2 px-1">
-          Entities
-        </p>
-        {entities.length === 0 ? (
-          <p className="text-xs text-[var(--color-text-muted)] px-1 italic">No entities loaded</p>
-        ) : (
-          entities.map((e) => (
-            <button
-              key={e.id}
-              className="w-full text-left px-2 py-1.5 rounded text-sm text-[var(--color-text-secondary)] hover:bg-[var(--color-hover)] hover:text-[var(--color-text-primary)] transition-colors"
-            >
-              {e.name}
-            </button>
-          ))
-        )}
-      </div>
-
-      {/* SLOT Divider */}
-      <hr className="slot-divider mx-3" />
-
-      {/* SLOT NavGroup #filing-nav * @filings.list */}
-      <div id="filing-nav" className="p-3 flex flex-col gap-0.5 flex-1">
-        <p className="text-[10px] font-semibold tracking-widest uppercase text-[var(--color-text-muted)] mb-2 px-1">
-          Filings
-        </p>
-        {filings.length === 0 ? (
-          <p className="text-xs text-[var(--color-text-muted)] px-1 italic">No filings loaded</p>
-        ) : (
-          filings.map((f) => (
-            <button
-              key={f.id}
-              onClick={() => selectFiling(f)}  // emit:FilingSelected
-              className={[
-                'w-full text-left px-2 py-1.5 rounded text-xs transition-colors',
-                selectedFiling?.id === f.id
-                  ? 'bg-[var(--color-selected)] text-[var(--color-text-primary)] font-medium'
-                  : 'text-[var(--color-text-secondary)] hover:bg-[var(--color-hover)] hover:text-[var(--color-text-primary)]',
-              ].join(' ')}
-            >
-              <span className="block font-medium truncate">{f.entity}</span>
-              <span className="block text-[10px] text-[var(--color-text-muted)]">{f.period}</span>
-            </button>
-          ))
-        )}
-      </div>
+      {NAV_ITEMS.map((item) => (
+        <button
+          key={item.id}
+          onClick={() => navigate(item.id as any)}
+          title={item.label}
+          className={`
+            w-12 h-12 flex flex-col items-center justify-center rounded-lg transition-all
+            ${activeView === item.id 
+              ? 'bg-[var(--color-selected)] text-[var(--color-text-primary)] shadow-inner border border-[var(--color-border-subtle)]' 
+              : 'text-[var(--color-text-muted)] hover:bg-[var(--color-hover)] hover:text-[var(--color-text-secondary)]'}
+          `}
+        >
+          <svg 
+            viewBox="0 0 24 24" 
+            className="w-6 h-6 fill-current"
+          >
+            {item.icon}
+          </svg>
+          <span className="text-[9px] font-bold mt-1 uppercase tracking-tighter">
+            {item.label}
+          </span>
+        </button>
+      ))}
     </div>
   )
 }

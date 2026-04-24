@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { TopBar } from './TopBar'
 import { Body } from './Body'
 import { StatusBar } from './StatusBar'
+import { Sidebar } from './Sidebar'
 import { usePipelineStore } from '../../stores/pipeline.store'
 import { useFilingsStore } from '../../stores/filings.store'
 import { useSystemStore } from '../../stores/aux.store'
@@ -27,7 +28,10 @@ export function AppShell() {
       style={{ height: '100dvh' }}
     >
       <TopBar />
-      <Body />
+      <div className="flex flex-row flex-1 overflow-hidden">
+        <Sidebar />
+        <Body />
+      </div>
       <StatusBar />
     </div>
   )

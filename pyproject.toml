@@ -3,7 +3,7 @@ name = "tower-core-app"
 version = "0.1.0"
 description = "FERC Tower Core Application"
 authors = [{ name = "Raynier" }]
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 dependencies = [
     "lib-xbrl",
     "lib-xbrl-auditor",
@@ -11,6 +11,8 @@ dependencies = [
     "uvicorn[standard]",
     "pydantic",
     "pydantic-settings",
+    "psutil>=7.2.2",
+    "python-multipart>=0.0.26",
 ]
 
 [tool.uv.sources]
@@ -20,3 +22,6 @@ lib-xbrl-auditor = { workspace = true }
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]

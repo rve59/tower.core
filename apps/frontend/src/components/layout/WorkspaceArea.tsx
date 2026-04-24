@@ -2,7 +2,7 @@
 import { WorkspaceToolbar } from './WorkspaceToolbar'
 import { ContentPane } from './ContentPane'
 
-export function WorkspaceArea() {
+export function WorkspaceArea({ children }: { children?: React.ReactNode }) {
   return (
     <div
       data-region="WorkspaceArea"
@@ -10,7 +10,7 @@ export function WorkspaceArea() {
       style={{ backgroundColor: 'var(--color-base)' }}
     >
       <WorkspaceToolbar />
-      <ContentPane />
+      {children || <ContentPane />}
     </div>
   )
 }
