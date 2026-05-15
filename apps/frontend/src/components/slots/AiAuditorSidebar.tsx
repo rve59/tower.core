@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import ReactMarkdown from 'react-markdown'
 import { useWorkspaceStore } from '../../stores/workspace.store'
 
 export function AiAuditorSidebar() {
@@ -96,18 +97,20 @@ export function AiAuditorSidebar() {
         ) : analysis ? (
           <>
             {/* Analysis Card */}
-            <div className="p-4 bg-[var(--color-base)] border-l-2 border-[var(--color-accent)] rounded-r-lg shadow-sm">
-               <p className="text-[11px] font-bold text-[var(--color-text-primary)] mb-2">
-                 Audit of {selectedRuleId}:
-               </p>
-               <p className="text-[11px] text-[var(--color-text-secondary)] leading-relaxed mb-3">
-                 {analysis.narrative || "The agent has detected a recurring pattern in the failing records related to historical data drift."}
-               </p>
-               {analysis.technical_reason && (
-                 <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed italic bg-[var(--color-surface)]/50 p-2 rounded">
-                   "{analysis.technical_reason}"
+            <div className="flex flex-col gap-4">
+              <div className="p-4 bg-[var(--color-base)] border-l-2 border-[var(--color-accent)] rounded-r-lg shadow-sm">
+                 <p className="text-[11px] font-bold text-[var(--color-text-primary)] mb-4 uppercase tracking-widest opacity-80">
+                   Audit of {selectedRuleId}:
                  </p>
-               )}
+                 <div className="markdown-content text-[11px] text-[var(--color-text-secondary)] leading-relaxed mb-3">
+                   <ReactMarkdown>{analysis.narrative || "The agent has detected a recurring pattern..."}</ReactMarkdown>
+                 </div>
+                 {analysis.technical_reason && (
+                   <p className="text-[10px] text-[var(--color-text-muted)] leading-relaxed italic bg-[var(--color-surface)]/50 p-2 rounded mt-4 border border-[var(--color-border-subtle)]/30">
+                     Agent Signal: "{analysis.technical_reason}"
+                   </p>
+                 )}
+              </div>
             </div>
 
             {/* Suggestion Section */}

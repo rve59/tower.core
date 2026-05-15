@@ -1,15 +1,17 @@
 // [LSL-GEN] id: WorkspaceToolbar | REGION 8 WorkspaceToolbar row hug bar
 import * as React from 'react'
-import { Database, Upload, ChevronDown, DownloadCloud } from 'lucide-react'
+import { Database, ChevronDown, DownloadCloud } from 'lucide-react'
 import { useWorkspaceStore } from '../../stores/workspace.store'
 import { useFilingsStore } from '../../stores/filings.store'
 import { useFiltersStore, useSearchStore } from '../../stores/aux.store'
+import { useRouterStore } from '../../stores/router.store'
 
 const YEARS = ['2026', '2025', '2024', '2023', '2022', '2021', '2020']
 const QUARTERS = ['1', '2', '3', '4']
 
 export function WorkspaceToolbar() {
-  const path = useWorkspaceStore((s) => s.path)
+  const activeView = useRouterStore((s) => s.activeView)
+  const selectedFiling = useWorkspaceStore((s) => s.selectedFiling)
   const fetchFilings = useFilingsStore((s) => s.fetch)
   const { year, setYear, quarter, setQuarter } = useFiltersStore()
   // We repurpose query as CID
@@ -54,18 +56,6 @@ export function WorkspaceToolbar() {
     }
   }
 
-  const handleIngest = async () => {
-    try {
-      await fetch('/v1/ingest/extract', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ year, quarter, cid })
-      })
-      console.info('[TOWER] IngestDataset dispatched to backend')
-    } catch {
-      console.error('[TOWER] IngestDataset failed — backend not available')
-    }
-  }
 
   const handleRebuildIndex = async () => {
     try {
@@ -85,7 +75,17 @@ export function WorkspaceToolbar() {
       style={{ height: '8%', minHeight: 44, backgroundColor: 'var(--color-bar-bg)' }}
     >
       <span id="ws-breadcrumb" className="text-sm text-[var(--color-text-muted)] truncate flex-1 min-w-0">
-        {path}
+        TOWER / {activeView === 'validation' ? 'Audit' : activeView.charAt(0).toUpperCase() + activeView.slice(1)}
+        {selectedFiling && (
+          <>
+            <span className="mx-1 opacity-40">/</span>
+            <span className="text-[var(--color-text-secondary)] font-bold">
+              {selectedFiling.entity || selectedFiling.id}
+            </span>
+            <span className="mx-1 opacity-40">/</span>
+            <span className="opacity-60">{selectedFiling.period}</span>
+          </>
+        )}
       </span>
 
       <button
@@ -118,47 +118,6 @@ export function WorkspaceToolbar() {
         </div>
       </button>
 
-      <button
-        id="ingest-btn"
-        onClick={handleIngest}
-        className="slot-button flex items-center gap-1.5 text-xs"
-      >
-        <Upload size={14} />
-        Ingest Dataset
-      </button>
-
-      <div className="relative">
-        <select
-          value={year}
-          onChange={(e) => setYear(e.target.value)}
-          className="appearance-none text-sm px-3 py-1.5 pr-7 rounded border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] cursor-pointer focus:outline-none focus:border-[var(--color-accent)]"
-        >
-          {YEARS.map((y) => <option key={y} value={y}>{y}</option>)}
-        </select>
-        <ChevronDown size={12} className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-[var(--color-text-muted)]" />
-      </div>
-
-      <div className="relative">
-        <select
-          value={quarter}
-          onChange={(e) => setQuarter(e.target.value)}
-          className="appearance-none text-sm px-3 py-1.5 pr-7 rounded border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] cursor-pointer focus:outline-none focus:border-[var(--color-accent)]"
-        >
-          {QUARTERS.map((q) => <option key={q} value={q}>Q{q}</option>)}
-        </select>
-        <ChevronDown size={12} className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-[var(--color-text-muted)]" />
-      </div>
-
-      <div className="relative">
-        <Database size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)]" />
-        <input
-          type="text"
-          value={cid}
-          onChange={(e) => setCid(e.target.value)}
-          placeholder="CID (e.g. 6446663)"
-          className="text-sm pl-8 pr-3 py-1.5 rounded border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent)] w-32 font-mono"
-        />
-      </div>
     </div>
   )
 }

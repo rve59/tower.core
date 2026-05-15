@@ -9,27 +9,39 @@ import { AiAuditorSidebar } from '../slots/AiAuditorSidebar'
 
 export function ValidationView() {
   const [sidebarWidth, setSidebarWidth] = useState(280)
-  const [isResizing, setIsResizing] = useState(false)
+  const [preAuditWidth, setPreAuditWidth] = useState(300)
+  const [resizingTarget, setResizingTarget] = useState<'sidebar' | 'preaudit' | null>(null)
 
-  const startResizing = useCallback((e: React.MouseEvent) => {
-    setIsResizing(true)
+  const startResizingSidebar = useCallback((e: React.MouseEvent) => {
+    setResizingTarget('sidebar')
+    e.preventDefault()
+  }, [])
+
+  const startResizingPreAudit = useCallback((e: React.MouseEvent) => {
+    setResizingTarget('preaudit')
     e.preventDefault()
   }, [])
 
   const stopResizing = useCallback(() => {
-    setIsResizing(false)
+    setResizingTarget(null)
   }, [])
 
   const resize = useCallback(
     (e: MouseEvent) => {
-      if (isResizing) {
+      if (resizingTarget === 'sidebar') {
         const newWidth = e.clientX
-        if (newWidth > 200 && newWidth < 500) {
+        if (newWidth > 150 && newWidth < 500) {
           setSidebarWidth(newWidth)
+        }
+      } else if (resizingTarget === 'preaudit') {
+        // Calculate offset from the end of the sidebar
+        const newWidth = e.clientX - sidebarWidth
+        if (newWidth > 250 && newWidth < 600) {
+          setPreAuditWidth(newWidth)
         }
       }
     },
-    [isResizing]
+    [resizingTarget, sidebarWidth]
   )
 
   useEffect(() => {
@@ -46,30 +58,40 @@ export function ValidationView() {
       data-region="validation"
       className="flex flex-row flex-1 overflow-hidden"
     >
-      {/* Resizable Sidebar */}
+      {/* Filing Sidebar */}
       <div 
         className="flex-none border-r border-[var(--color-border-subtle)] bg-[var(--color-panel-bg)] flex flex-row"
         style={{ width: `${sidebarWidth}px` }}
       >
         <FilingNavigator />
-        
-        {/* Vertical Dragbar */}
         <div 
-          onMouseDown={startResizing}
+          onMouseDown={startResizingSidebar}
           data-dragbar
           data-axis="col"
-          data-active={isResizing || undefined}
+          data-active={resizingTarget === 'sidebar' || undefined}
           className="flex-none"
         />
       </div>
       
       <WorkspaceArea>
         <ContentPane>
-          <div className="flex-1 flex flex-row gap-4 p-4 overflow-hidden h-full">
+          <div className="flex-1 flex flex-row p-4 overflow-hidden h-full">
             {/* Left: Rule List */}
-            <div className="w-72 flex-none flex flex-col h-full">
+            <div 
+              className="flex-none flex flex-col h-full"
+              style={{ width: `${preAuditWidth}px` }}
+            >
               <PreAuditShield />
             </div>
+
+            {/* Dragbar between Rule List and Grid */}
+            <div 
+              onMouseDown={startResizingPreAudit}
+              data-dragbar
+              data-axis="col"
+              data-active={resizingTarget === 'preaudit' || undefined}
+              className="flex-none mx-1"
+            />
 
             {/* Center: Evidence Grid */}
             <div className="flex-1 min-w-0 flex flex-col h-full">
@@ -77,7 +99,7 @@ export function ValidationView() {
             </div>
 
             {/* Right: AI Assistant */}
-            <div className="w-80 flex-none flex flex-col h-full">
+            <div className="w-80 flex-none flex flex-col h-full ml-4">
                <AiAuditorSidebar />
             </div>
           </div>

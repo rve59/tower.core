@@ -14,8 +14,8 @@ export default defineConfig({
       'Cross-Origin-Embedder-Policy': 'require-corp',
     },
     proxy: {
-      '/v1': { target: 'http://localhost:9042', changeOrigin: true },
-      '/ws': { target: 'ws://localhost:9042', ws: true },
+      '/v1': { target: 'http://tower-api:9042', changeOrigin: true },
+      '/ws': { target: 'ws://tower-api:9042', ws: true },
     },
   },
 })

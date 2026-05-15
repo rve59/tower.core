@@ -6,6 +6,7 @@ export function FilingNavigator() {
   const hierarchy = useFilingsStore((s: any) => s.hierarchy)
   const selectFiling = useWorkspaceStore((s: any) => s.selectFiling)
   const selectedFiling = useWorkspaceStore((s: any) => s.selectedFiling)
+  const recentlyLandedId = useWorkspaceStore((s: any) => s.recentlyLandedId)
 
   // Manage collapsible states for tiers
   const [collapsedTiers, setCollapsedTiers] = useState<Record<string, boolean>>({})
@@ -96,7 +97,7 @@ export function FilingNavigator() {
                           {company.periods.map((p: any) => (
                             <button
                               key={p.id}
-                              onClick={() => selectFiling(p)}
+                              onClick={() => selectFiling({ ...p, entity: company.name })}
                               className={[
                                 'w-full text-left px-2.5 py-1.5 rounded text-[11px] transition-all relative group flex items-center justify-between',
                                 selectedFiling?.id === p.id
@@ -106,6 +107,12 @@ export function FilingNavigator() {
                             >
                               <span className="font-mono">{p.period}</span>
                               <div className="flex items-center gap-1.5">
+                                {/* NEW badge — shown for 8s after infiltration completes */}
+                                {recentlyLandedId === p.id && (
+                                  <span className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-500 text-white text-[8px] font-bold tracking-wider animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.6)]">
+                                    NEW
+                                  </span>
+                                )}
                                 <span className={[
                                   'uppercase text-[8px] tracking-tighter px-1 rounded border transition-colors',
                                   selectedFiling?.id === p.id 

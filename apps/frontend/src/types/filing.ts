@@ -23,4 +23,4 @@ export interface Entity {
 }
 
 export type PipelineHealth = 'healthy' | 'degraded' | 'down'
-export type ActiveView = 'filings' | 'validation' | 'reports' | 'dashboard'
+export type ActiveView = 'filings' | 'validation' | 'reports' | 'dashboard' | 'cypher'

@@ -41,7 +41,7 @@ export function LogPanel() {
   }
 
   return (
-    <div className="flex flex-col h-[500px] bg-[#0d1117]/80 backdrop-blur-md rounded-xl border border-[#30363d] overflow-hidden shadow-2xl transition-all duration-300">
+    <div className="flex flex-col h-[600px] bg-[#0d1117]/80 backdrop-blur-md rounded-xl border border-[#30363d] overflow-hidden shadow-2xl transition-all duration-300">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-[#30363d] bg-[#161b22]/50">
         <div className="flex items-center gap-3">

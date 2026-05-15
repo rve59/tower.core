@@ -4,6 +4,7 @@ import { DashboardView } from '../views/DashboardView'
 import { FilingsView } from '../views/FilingsView'
 import { ValidationView } from '../views/ValidationView'
 import { ReportsView } from '../views/ReportsView'
+import { CypherSandboxView } from '../views/CypherSandboxView'
 
 export function Body() {
   const activeView = useRouterStore((s) => s.activeView)
@@ -14,6 +15,7 @@ export function Body() {
     filings:    <FilingsView />,
     validation: <ValidationView />,
     reports:    <ReportsView />,
+    cypher:     <CypherSandboxView />,
   }
 
   return (
