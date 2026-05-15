@@ -4,18 +4,25 @@ import { Database, ChevronDown, DownloadCloud } from 'lucide-react'
 import { useWorkspaceStore } from '../../stores/workspace.store'
 import { useFilingsStore } from '../../stores/filings.store'
 import { useFiltersStore, useSearchStore } from '../../stores/aux.store'
-import { useRouterStore } from '../../stores/router.store'
+import { useRouterStore, MaturityStage } from '../../stores/router.store'
 
 const YEARS = ['2026', '2025', '2024', '2023', '2022', '2021', '2020']
 const QUARTERS = ['1', '2', '3', '4']
 
 export function WorkspaceToolbar() {
-  const activeView = useRouterStore((s) => s.activeView)
+  const { activeView, activeStage, setStage } = useRouterStore()
   const selectedFiling = useWorkspaceStore((s) => s.selectedFiling)
   const fetchFilings = useFilingsStore((s) => s.fetch)
   const { year, setYear, quarter, setQuarter } = useFiltersStore()
   // We repurpose query as CID
   const { query: cid, setQuery: setCid } = useSearchStore()
+
+  const STAGES: { id: MaturityStage, label: string }[] = [
+    { id: 'BRONZE', label: 'Staging' },
+    { id: 'SILVER', label: 'Audit' },
+    { id: 'GOLD', label: 'Filing' },
+    { id: 'PLATINUM', label: 'Lake' },
+  ]
 
   const [syncStatus, setSyncStatus] = React.useState<string | null>(null)
   const [discoveryExists, setDiscoveryExists] = React.useState<boolean>(true)
@@ -71,53 +78,89 @@ export function WorkspaceToolbar() {
   return (
     <div
       data-region="WorkspaceToolbar"
-      className="bar flex-none flex flex-row items-center gap-3 px-4 border-b border-[var(--color-border-subtle)]"
-      style={{ height: '8%', minHeight: 44, backgroundColor: 'var(--color-bar-bg)' }}
+      className="bar flex-none flex flex-row items-center gap-6 px-6 border-b border-[#222]"
+      style={{ height: '10%', minHeight: 64, backgroundColor: '#0d0d0d' }}
     >
-      <span id="ws-breadcrumb" className="text-sm text-[var(--color-text-muted)] truncate flex-1 min-w-0">
-        TOWER / {activeView === 'validation' ? 'Audit' : activeView.charAt(0).toUpperCase() + activeView.slice(1)}
-        {selectedFiling && (
-          <>
-            <span className="mx-1 opacity-40">/</span>
-            <span className="text-[var(--color-text-secondary)] font-bold">
-              {selectedFiling.entity || selectedFiling.id}
+      {/* Context Info */}
+      <div className="flex flex-col gap-0.5 min-w-[200px]">
+        <span className="text-[10px] font-bold text-gray-600 uppercase tracking-widest">
+          {activeView === 'dashboard' ? 'Overview' : 'Active Filing'}
+        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-bold text-gray-200">
+            {selectedFiling ? (selectedFiling.entity || selectedFiling.id) : 'TOWER Workspace'}
+          </span>
+          {selectedFiling && (
+            <span className="text-[9px] px-1.5 py-0.5 bg-[#1a1a1a] text-gray-500 rounded font-mono uppercase">
+              {selectedFiling.period}
             </span>
-            <span className="mx-1 opacity-40">/</span>
-            <span className="opacity-60">{selectedFiling.period}</span>
-          </>
-        )}
-      </span>
-
-      <button
-        onClick={handleSync}
-        className="px-3 py-1 rounded flex items-center gap-2 text-xs font-bold bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:bg-[var(--color-hover)] hover:text-[var(--color-text-primary)] transition-colors text-left"
-      >
-        <DownloadCloud size={16} />
-        <div className="flex flex-col leading-tight">
-          <span>Sync Master</span>
-          <span className="text-[10px] font-normal opacity-60">
-            {syncStatus ? `Last: ${syncStatus}` : 'Checking...'}
-          </span>
+          )}
         </div>
-      </button>
+      </div>
 
-      <button
-        onClick={handleRebuildIndex}
-        className={`px-3 py-1 rounded flex items-center gap-2 text-xs font-bold border transition-colors text-left ${
-          discoveryExists 
-            ? "bg-[var(--color-surface)] border-[var(--color-border)] text-[var(--color-accent)] hover:bg-[var(--color-hover)] hover:text-[var(--color-text-primary)]"
-            : "bg-[#f59e0b20] border-[#f59e0b80] text-[#f59e0b] hover:bg-[#f59e0b40]"
-        }`}
-      >
-        <Database size={16} />
-        <div className="flex flex-col leading-tight">
-          <span>Rebuild Discovery</span>
-          <span className="text-[10px] font-normal opacity-60">
-            CID Indexing
-          </span>
+      {/* Workflow Stepper */}
+      {selectedFiling && (
+        <div className="flex-1 flex items-center justify-center gap-1">
+          {STAGES.map((s, i) => (
+            <React.Fragment key={s.id}>
+              <button
+                onClick={() => setStage(s.id)}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all border ${
+                  activeStage === s.id 
+                    ? 'bg-blue-600/10 border-blue-500/40 text-blue-400 shadow-lg shadow-blue-900/10' 
+                    : 'bg-transparent border-transparent text-gray-600 hover:text-gray-400'
+                }`}
+              >
+                <div className={`w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold border ${
+                  activeStage === s.id ? 'bg-blue-600 border-blue-400 text-white' : 'bg-[#1a1a1a] border-[#222] text-gray-500'
+                }`}>
+                  {i + 1}
+                </div>
+                <div className="flex flex-col items-start leading-none">
+                  <span className="text-[10px] font-bold uppercase tracking-wider">{s.id}</span>
+                  <span className="text-[9px] opacity-60 font-medium">{s.label}</span>
+                </div>
+              </button>
+              {i < STAGES.length - 1 && (
+                <div className="w-8 h-px bg-[#222]" />
+              )}
+            </React.Fragment>
+          ))}
         </div>
-      </button>
+      )}
 
+      {/* Actions */}
+      <div className="flex items-center gap-3">
+        <button
+          onClick={handleSync}
+          className="px-3 py-1 rounded flex items-center gap-2 text-xs font-bold bg-[#111] border border-[#222] text-gray-400 hover:bg-[#1a1a1a] hover:text-white transition-colors text-left"
+        >
+          <DownloadCloud size={16} />
+          <div className="flex flex-col leading-tight">
+            <span className="text-[10px] uppercase tracking-wider">Sync Master</span>
+            <span className="text-[9px] font-normal opacity-60">
+              {syncStatus ? `Last: ${syncStatus}` : 'Checking...'}
+            </span>
+          </div>
+        </button>
+
+        <button
+          onClick={handleRebuildIndex}
+          className={`px-3 py-1 rounded flex items-center gap-2 text-xs font-bold border transition-colors text-left ${
+            discoveryExists 
+              ? "bg-[#111] border-[#222] text-blue-400 hover:bg-[#1a1a1a] hover:text-blue-300"
+              : "bg-[#f59e0b10] border-[#f59e0b40] text-[#f59e0b] hover:bg-[#f59e0b20]"
+          }`}
+        >
+          <Database size={16} />
+          <div className="flex flex-col leading-tight">
+            <span className="text-[10px] uppercase tracking-wider">Rebuild Index</span>
+            <span className="text-[9px] font-normal opacity-60">
+              CID Indexing
+            </span>
+          </div>
+        </button>
+      </div>
     </div>
   )
 }

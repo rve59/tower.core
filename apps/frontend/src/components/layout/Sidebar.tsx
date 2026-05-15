@@ -1,40 +1,39 @@
 import { useRouterStore } from '../../stores/router.store'
+import { LayoutDashboard, Files, Settings, Activity } from 'lucide-react'
 
 export function Sidebar() {
   const { activeView, navigate } = useRouterStore()
 
   const NAV_ITEMS = [
-    { id: 'filings',    label: 'Files', icon: <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" /> },
-    { id: 'validation', label: 'Audit', icon: <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" /> },
-    { id: 'reports',    label: 'Report', icon: <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" /> },
-    { id: 'dashboard',  label: 'Dash', icon: <path d="M3 3h7v7H3V3zm11 0h7v7h-7V3zm0 11h7v7h-7v-7zM3 14h7v7H3v-7z" /> },
-    { id: 'cypher',     label: 'Code', icon: <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-9 12H5v-2h6v2zm8-4H5V8h14v4z" /> },
+    { id: 'dashboard', label: 'Pipeline', icon: <LayoutDashboard size={20} /> },
+    { id: 'filings',   label: 'Files',    icon: <Files size={20} /> },
+    { id: 'telemetry', label: 'Health',   icon: <Activity size={20} /> },
+    { id: 'settings',  label: 'Setup',    icon: <Settings size={20} /> },
   ]
 
   return (
     <div
       data-region="Sidebar"
-      className="flex flex-col flex-none w-16 bg-[var(--color-panel-bg)] border-r border-[var(--color-border-subtle)] items-center py-4 gap-4"
+      className="flex flex-col flex-none w-20 bg-[#0d0d0d] border-r border-[#222] items-center py-6 gap-6"
     >
+      <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-blue-900/40">
+        <span className="text-white font-black text-xl">T</span>
+      </div>
+
       {NAV_ITEMS.map((item) => (
         <button
           key={item.id}
           onClick={() => navigate(item.id as any)}
           title={item.label}
           className={`
-            w-12 h-12 flex flex-col items-center justify-center rounded-lg transition-all
+            w-14 h-14 flex flex-col items-center justify-center rounded-xl transition-all gap-1
             ${activeView === item.id 
-              ? 'bg-[var(--color-selected)] text-[var(--color-text-primary)] shadow-inner border border-[var(--color-border-subtle)]' 
-              : 'text-[var(--color-text-muted)] hover:bg-[var(--color-hover)] hover:text-[var(--color-text-secondary)]'}
+              ? 'bg-[#1a1a1a] text-blue-400 border border-[#333]' 
+              : 'text-gray-600 hover:bg-[#111] hover:text-gray-300'}
           `}
         >
-          <svg 
-            viewBox="0 0 24 24" 
-            className="w-6 h-6 fill-current"
-          >
-            {item.icon}
-          </svg>
-          <span className="text-[9px] font-bold mt-1 uppercase tracking-tighter">
+          {item.icon}
+          <span className="text-[9px] font-bold uppercase tracking-widest scale-75">
             {item.label}
           </span>
         </button>
